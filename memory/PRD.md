@@ -133,11 +133,13 @@ Create a modern, responsive, and professional website for a fast food restaurant
 #### Design Implementation:
 - Yellow-Orange gradient color scheme (orange-500 to yellow-500)
 - Poppins Google Font
-- Custom animations (fade-in, slide-up, bounce-slow)
+- **Simple CSS with semantic class names** (.hero-section, .menu-card, .service-card, etc.)
+- Custom animations (fade-in, slide-up, bounce-slow) defined in CSS
 - Custom scrollbar styling
-- Responsive grid layouts
-- Shadcn Button and Card components
-- Glass-morphism effects on header
+- Responsive grid layouts using CSS Grid
+- **No Tailwind utility classes** - all styling in dedicated CSS files
+- Button styles defined as CSS classes (.btn-primary, .btn-outline-orange, etc.)
+- Modular component-based CSS structure
 
 ## Technical Architecture
 
