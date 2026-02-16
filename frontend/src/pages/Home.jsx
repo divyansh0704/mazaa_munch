@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Phone, MapPin, Clock, Star, Utensils, ShoppingBag, Truck, Smartphone, Mail, Facebook, Instagram, MessageCircle } from 'lucide-react';
-import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 import { restaurantInfo, menuItems, services, reviews } from '../mockData';
+import './Home.css';
 
 const Home = () => {
   const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
@@ -32,180 +31,155 @@ const Home = () => {
 
   const getServiceIcon = (title) => {
     switch(title) {
-      case 'Dine-In': return <Utensils className="w-8 h-8" />;
-      case 'Kerbside Pickup': return <ShoppingBag className="w-8 h-8" />;
-      case 'No-Contact Delivery': return <Truck className="w-8 h-8" />;
-      case 'Online Ordering': return <Smartphone className="w-8 h-8" />;
-      default: return <Utensils className="w-8 h-8" />;
+      case 'Dine-In': return <Utensils />;
+      case 'Kerbside Pickup': return <ShoppingBag />;
+      case 'No-Contact Delivery': return <Truck />;
+      case 'Online Ordering': return <Smartphone />;
+      default: return <Utensils />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-orange-50 to-white">
+    <div className="home-container">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-md z-50 transition-all">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full flex items-center justify-center">
-                <Utensils className="w-6 h-6 text-white" />
+      <header className="header">
+        <div className="header-container">
+          <div className="header-content">
+            <div className="header-brand">
+              <div className="header-logo">
+                <Utensils />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
-                  {restaurantInfo.name} <span className="text-orange-500">| {restaurantInfo.nameHindi}</span>
+                <h1 className="header-title">
+                  {restaurantInfo.name} <span className="header-title-accent">| {restaurantInfo.nameHindi}</span>
                 </h1>
-                <div className="flex items-center gap-1 text-sm">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="font-semibold">{restaurantInfo.rating}</span>
-                  <span className="text-gray-600">({restaurantInfo.reviewCount} reviews)</span>
+                <div className="header-rating">
+                  <Star />
+                  <span className="header-rating-number">{restaurantInfo.rating}</span>
+                  <span className="header-rating-count">({restaurantInfo.reviewCount} reviews)</span>
                 </div>
               </div>
             </div>
-            <div className="hidden md:flex items-center gap-4">
-              <Button 
-                onClick={handleCall}
-                variant="outline" 
-                className="flex items-center gap-2 border-orange-400 text-orange-600 hover:bg-orange-50"
-              >
-                <Phone className="w-4 h-4" />
+            <div className="header-actions">
+              <button onClick={handleCall} className="btn-outline-orange">
+                <Phone />
                 Call Now
-              </Button>
+              </button>
             </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-orange-100 via-yellow-50 to-orange-50 opacity-60"></div>
-        <div className="container mx-auto relative z-10">
-          <div className="text-center max-w-4xl mx-auto">
-            <h2 className="text-5xl md:text-7xl font-bold mb-6 text-gray-900 animate-fade-in">
+      <section className="hero-section">
+        <div className="hero-background"></div>
+        <div className="hero-container">
+          <div className="hero-content">
+            <h2 className="hero-title">
               {restaurantInfo.tagline}
             </h2>
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 animate-slide-up">
+            <p className="hero-subtitle">
               Naraingarh's Most Loved Fast Food Destination
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-slide-up">
-              <Button 
-                onClick={handleWhatsAppOrder}
-                size="lg" 
-                className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold px-8 py-6 text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all"
-              >
-                <MessageCircle className="w-5 h-5 mr-2" />
+            <div className="hero-buttons">
+              <button onClick={handleWhatsAppOrder} className="btn-primary">
+                <MessageCircle />
                 Order Online
-              </Button>
-              <Button 
+              </button>
+              <button 
                 onClick={() => document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })}
-                size="lg" 
-                variant="outline"
-                className="border-2 border-orange-500 text-orange-600 hover:bg-orange-50 font-semibold px-8 py-6 text-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
+                className="btn-outline-orange"
               >
                 View Menu
-              </Button>
-              <Button 
-                onClick={handleGetDirections}
-                size="lg" 
-                variant="outline"
-                className="border-2 border-yellow-500 text-yellow-700 hover:bg-yellow-50 font-semibold px-8 py-6 text-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all"
-              >
-                <MapPin className="w-5 h-5 mr-2" />
+              </button>
+              <button onClick={handleGetDirections} className="btn-outline-yellow">
+                <MapPin />
                 Get Directions
-              </Button>
+              </button>
             </div>
-            <div className="mt-8 flex items-center justify-center gap-4 text-gray-600">
-              <div className="flex items-center gap-2">
-                <Clock className="w-5 h-5 text-orange-500" />
-                <span className="font-medium">{restaurantInfo.timings}</span>
+            <div className="hero-info">
+              <div className="hero-info-item">
+                <Clock />
+                <span>{restaurantInfo.timings}</span>
               </div>
-              <span className="text-2xl">•</span>
-              <span className="font-medium">{restaurantInfo.priceRange}</span>
+              <span className="hero-info-separator">•</span>
+              <span>{restaurantInfo.priceRange}</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center">
-            <h3 className="text-4xl font-bold mb-6 text-gray-900">About Us</h3>
-            <p className="text-lg text-gray-700 leading-relaxed">
+      <section className="about-section">
+        <div className="section-container">
+          <div className="section-content">
+            <h3 className="section-title">About Us</h3>
+            <p className="section-text">
               Mazaa Munch is one of the most loved fast food destinations in Naraingarh. 
               Known for delicious taste, friendly service, and a perfect family dining experience, 
               we bring you the authentic flavors of street food with a modern twist. 
               Our commitment to quality and taste has made us a favorite among food lovers in Panchkula.
             </p>
-            <div className="mt-8 inline-block bg-gradient-to-r from-orange-100 to-yellow-100 px-6 py-3 rounded-full">
-              <span className="text-orange-600 font-semibold">🏳️‍🌈 LGBTQ+ Friendly Establishment</span>
+            <div className="lgbtq-badge">
+              <span>🏳️‍🌈 LGBTQ+ Friendly Establishment</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Menu Highlights Section */}
-      <section id="menu" className="py-16 px-4 bg-gradient-to-b from-orange-50 to-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold mb-4 text-gray-900">Menu Highlights</h3>
-            <p className="text-lg text-gray-600">Discover our most popular dishes</p>
+      <section id="menu" className="menu-section">
+        <div className="section-container">
+          <div className="section-header">
+            <h3 className="section-title">Menu Highlights</h3>
+            <p className="section-subtitle">Discover our most popular dishes</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="menu-grid">
             {menuItems.map((item) => (
-              <Card 
-                key={item.id} 
-                className="overflow-hidden hover:shadow-2xl transform hover:scale-105 transition-all duration-300 border-2 border-transparent hover:border-orange-400"
-              >
-                <div className="relative h-48 overflow-hidden">
+              <div key={item.id} className="menu-card">
+                <div className="menu-card-image-container">
                   <img 
                     src={item.image} 
                     alt={item.name}
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-500"
+                    className="menu-card-image"
                   />
                   {item.featured && (
-                    <div className="absolute top-3 right-3 bg-gradient-to-r from-orange-500 to-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    <div className="menu-card-badge">
                       Popular
                     </div>
                   )}
                 </div>
-                <CardContent className="p-4">
-                  <h4 className="text-xl font-bold mb-2 text-gray-900">{item.name}</h4>
-                  <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-orange-600">{item.price}</span>
-                    <Button 
-                      onClick={handleWhatsAppOrder}
-                      size="sm" 
-                      className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white"
-                    >
+                <div className="menu-card-content">
+                  <h4 className="menu-card-title">{item.name}</h4>
+                  <p className="menu-card-description">{item.description}</p>
+                  <div className="menu-card-footer">
+                    <span className="menu-card-price">{item.price}</span>
+                    <button onClick={handleWhatsAppOrder} className="btn-primary" style={{fontSize: '0.875rem', padding: '0.5rem 1rem'}}>
                       Order Now
-                    </Button>
+                    </button>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold mb-4 text-gray-900">Our Services</h3>
-            <p className="text-lg text-gray-600">Multiple ways to enjoy our delicious food</p>
+      <section className="services-section">
+        <div className="section-container">
+          <div className="section-header">
+            <h3 className="section-title">Our Services</h3>
+            <p className="section-subtitle">Multiple ways to enjoy our delicious food</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="services-grid">
             {services.map((service) => (
-              <div 
-                key={service.id}
-                className="text-center p-6 rounded-2xl bg-gradient-to-br from-orange-50 to-yellow-50 hover:shadow-lg transform hover:scale-105 transition-all duration-300"
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-orange-400 to-yellow-400 text-white rounded-full mb-4 shadow-md">
+              <div key={service.id} className="service-card">
+                <div className="service-icon">
                   {getServiceIcon(service.title)}
                 </div>
-                <h4 className="text-xl font-bold mb-2 text-gray-900">{service.title}</h4>
-                <p className="text-gray-600">{service.description}</p>
+                <h4 className="service-title">{service.title}</h4>
+                <p className="service-description">{service.description}</p>
               </div>
             ))}
           </div>
@@ -213,66 +187,59 @@ const Home = () => {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-orange-50 to-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold mb-4 text-gray-900">What Our Customers Say</h3>
-            <div className="flex items-center justify-center gap-2 mb-2">
+      <section className="reviews-section">
+        <div className="section-container">
+          <div className="reviews-header">
+            <h3 className="section-title">What Our Customers Say</h3>
+            <div className="rating-display">
               {[1, 2, 3, 4, 5].map((star) => (
                 <Star 
                   key={star} 
-                  className={`w-8 h-8 ${star <= Math.floor(restaurantInfo.rating) ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
+                  className={star <= Math.floor(restaurantInfo.rating) ? 'star-filled' : 'star-empty'} 
                 />
               ))}
             </div>
-            <p className="text-2xl font-bold text-gray-900">
-              {restaurantInfo.rating} out of 5 <span className="text-gray-600 font-normal text-lg">({restaurantInfo.reviewCount} reviews)</span>
+            <p className="rating-text">
+              {restaurantInfo.rating} out of 5 <span className="rating-count">({restaurantInfo.reviewCount} reviews)</span>
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="reviews-grid">
             {reviews.map((review) => (
-              <Card key={review.id} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-1 mb-3">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star 
-                        key={star} 
-                        className={`w-4 h-4 ${star <= review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-300'}`} 
-                      />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 mb-4 italic">"{review.comment}"</p>
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-semibold text-gray-900">{review.name}</span>
-                    <span className="text-gray-500">{review.date}</span>
-                  </div>
-                </CardContent>
-              </Card>
+              <div key={review.id} className="review-card">
+                <div className="review-stars">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star 
+                      key={star} 
+                      className={star <= review.rating ? 'star-filled' : 'star-empty'} 
+                    />
+                  ))}
+                </div>
+                <p className="review-comment">"{review.comment}"</p>
+                <div className="review-footer">
+                  <span className="review-author">{review.name}</span>
+                  <span className="review-date">{review.date}</span>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Location Section */}
-      <section className="py-16 px-4 bg-white">
-        <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold mb-4 text-gray-900">Visit Us</h3>
-            <p className="text-lg text-gray-600 mb-2">{restaurantInfo.address}</p>
-            <Button 
-              onClick={handleGetDirections}
-              className="bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white mt-4"
-            >
-              <MapPin className="w-4 h-4 mr-2" />
+      <section className="location-section">
+        <div className="section-container">
+          <div className="location-header">
+            <h3 className="section-title">Visit Us</h3>
+            <p className="location-address">{restaurantInfo.address}</p>
+            <button onClick={handleGetDirections} className="btn-primary" style={{marginTop: '1rem'}}>
+              <MapPin />
               Get Directions
-            </Button>
+            </button>
           </div>
-          <div className="max-w-5xl mx-auto rounded-2xl overflow-hidden shadow-2xl">
+          <div className="location-map-container">
             <iframe
               src={restaurantInfo.mapEmbedUrl}
-              width="100%"
-              height="450"
-              style={{ border: 0 }}
+              className="location-map"
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
@@ -283,145 +250,140 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-orange-50 to-white">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-12">
-            <h3 className="text-4xl font-bold mb-4 text-gray-900">Get In Touch</h3>
-            <p className="text-lg text-gray-600">Have questions? We'd love to hear from you!</p>
+      <section className="contact-section">
+        <div className="section-container">
+          <div className="section-header">
+            <h3 className="section-title">Get In Touch</h3>
+            <p className="section-subtitle">Have questions? We'd love to hear from you!</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-white" />
+          <div className="contact-grid">
+            <div className="contact-info">
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <Phone />
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1 text-gray-900">Phone</h4>
-                  <a href={`tel:${restaurantInfo.phone}`} className="text-orange-600 hover:underline">
+                <div className="contact-item-content">
+                  <h4>Phone</h4>
+                  <a href={`tel:${restaurantInfo.phone}`} className="contact-phone">
                     {restaurantInfo.phone}
                   </a>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-white" />
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <MapPin />
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1 text-gray-900">Address</h4>
-                  <p className="text-gray-700">{restaurantInfo.address}</p>
+                <div className="contact-item-content">
+                  <h4>Address</h4>
+                  <p className="contact-text">{restaurantInfo.address}</p>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-orange-400 to-yellow-400 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-white" />
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <Clock />
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1 text-gray-900">Hours</h4>
-                  <p className="text-gray-700">{restaurantInfo.timings}</p>
-                  <p className="text-sm text-gray-600">Open Daily</p>
+                <div className="contact-item-content">
+                  <h4>Hours</h4>
+                  <p className="contact-text">{restaurantInfo.timings}</p>
+                  <p className="contact-hours-detail">Open Daily</p>
                 </div>
               </div>
             </div>
-            <Card className="shadow-lg">
-              <CardContent className="p-6">
-                {formSubmitted ? (
-                  <div className="text-center py-8">
-                    <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-                      </svg>
-                    </div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h4>
-                    <p className="text-gray-600">We'll get back to you soon.</p>
+            <div className="contact-form-card">
+              {formSubmitted ? (
+                <div className="form-success">
+                  <div className="success-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
                   </div>
-                ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-4">
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-900">Name</label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-400 focus:outline-none transition-colors"
-                        placeholder="Your name"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-900">Phone</label>
-                      <input
-                        type="tel"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-400 focus:outline-none transition-colors"
-                        placeholder="Your phone number"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-900">Message</label>
-                      <textarea
-                        required
-                        value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        rows="4"
-                        className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:border-orange-400 focus:outline-none transition-colors resize-none"
-                        placeholder="Your message"
-                      ></textarea>
-                    </div>
-                    <Button 
-                      type="submit"
-                      className="w-full bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-white font-semibold py-3"
-                    >
-                      <Mail className="w-4 h-4 mr-2" />
-                      Send Message
-                    </Button>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
+                  <h4 className="success-title">Message Sent!</h4>
+                  <p className="success-message">We'll get back to you soon.</p>
+                </div>
+              ) : (
+                <form onSubmit={handleContactSubmit} className="contact-form">
+                  <div className="form-group">
+                    <label>Name</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({...formData, name: e.target.value})}
+                      className="form-input"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Phone</label>
+                    <input
+                      type="tel"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      className="form-input"
+                      placeholder="Your phone number"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>Message</label>
+                    <textarea
+                      required
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      rows="4"
+                      className="form-textarea"
+                      placeholder="Your message"
+                    ></textarea>
+                  </div>
+                  <button type="submit" className="btn-submit">
+                    <Mail />
+                    Send Message
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-            <div>
-              <h4 className="text-2xl font-bold mb-4 text-orange-400">{restaurantInfo.name}</h4>
-              <p className="text-gray-400 mb-4">{restaurantInfo.nameHindi}</p>
-              <p className="text-gray-400">
+      <footer className="footer">
+        <div className="section-container">
+          <div className="footer-grid">
+            <div className="footer-brand">
+              <h4>{restaurantInfo.name}</h4>
+              <p>{restaurantInfo.nameHindi}</p>
+              <p>
                 Naraingarh's favorite fast food destination serving delicious meals since day one.
               </p>
             </div>
-            <div>
-              <h5 className="text-lg font-bold mb-4 text-orange-400">Quick Links</h5>
-              <ul className="space-y-2">
-                <li><a href="#menu" className="text-gray-400 hover:text-orange-400 transition-colors">Menu</a></li>
-                <li><a href="#" onClick={handleWhatsAppOrder} className="text-gray-400 hover:text-orange-400 transition-colors">Order Online</a></li>
-                <li><a href="#" onClick={handleGetDirections} className="text-gray-400 hover:text-orange-400 transition-colors">Directions</a></li>
-                <li><span className="text-gray-400">🏳️‍🌈 LGBTQ+ Friendly</span></li>
+            <div className="footer-section">
+              <h5>Quick Links</h5>
+              <ul className="footer-links">
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#" onClick={handleWhatsAppOrder}>Order Online</a></li>
+                <li><a href="#" onClick={handleGetDirections}>Directions</a></li>
+                <li><span>🏳️‍🌈 LGBTQ+ Friendly</span></li>
               </ul>
             </div>
-            <div>
-              <h5 className="text-lg font-bold mb-4 text-orange-400">Business Hours</h5>
-              <p className="text-gray-400 mb-4">{restaurantInfo.timings}</p>
-              <p className="text-gray-400 mb-4">Open Daily</p>
-              <div className="flex gap-4">
-                <a href="#" className="w-10 h-10 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center transition-colors">
-                  <Facebook className="w-5 h-5" />
+            <div className="footer-section">
+              <h5>Business Hours</h5>
+              <p className="footer-hours">{restaurantInfo.timings}</p>
+              <p className="footer-hours">Open Daily</p>
+              <div className="footer-social">
+                <a href="#" className="social-link">
+                  <Facebook />
                 </a>
-                <a href="#" className="w-10 h-10 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center transition-colors">
-                  <Instagram className="w-5 h-5" />
+                <a href="#" className="social-link">
+                  <Instagram />
                 </a>
-                <a href={`https://wa.me/${restaurantInfo.phone}`} className="w-10 h-10 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center transition-colors">
-                  <MessageCircle className="w-5 h-5" />
+                <a href={`https://wa.me/${restaurantInfo.phone}`} className="social-link">
+                  <MessageCircle />
                 </a>
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 text-center text-gray-400">
+          <div className="footer-bottom">
             <p>&copy; 2024 {restaurantInfo.name}. All rights reserved. | {restaurantInfo.website}</p>
           </div>
         </div>
@@ -430,10 +392,10 @@ const Home = () => {
       {/* Floating WhatsApp Button */}
       <button
         onClick={handleWhatsAppOrder}
-        className="fixed bottom-6 right-6 w-16 h-16 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl flex items-center justify-center z-50 transform hover:scale-110 transition-all animate-bounce-slow"
+        className="whatsapp-float"
         aria-label="Order via WhatsApp"
       >
-        <MessageCircle className="w-8 h-8" />
+        <MessageCircle />
       </button>
     </div>
   );
