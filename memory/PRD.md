@@ -54,6 +54,11 @@ Create a modern, responsive, and professional website for a fast food restaurant
 **Status:** Completed  
 **Date:** February 16, 2026
 
+### Phase 1.5: CSS Migration ✅
+**Status:** Completed  
+**Date:** February 16, 2026  
+**Change:** Migrated from Tailwind CSS to simple CSS files with className approach
+
 #### Files Created:
 1. `/app/frontend/src/mockData.js` - Mock data for menu items, reviews, services, restaurant info
 2. `/app/frontend/src/pages/Home.jsx` - Main landing page component (8 sections)
